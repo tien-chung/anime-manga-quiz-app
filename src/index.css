@@ -122,3 +122,7 @@ div {
 .disabled-answer {
     pointer-events: none;
 }
+
+.disabled-button {
+    pointer-events: none;
+}

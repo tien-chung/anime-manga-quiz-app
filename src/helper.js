@@ -1,4 +1,4 @@
-export const shuffleAnswers = question => {
+export const shuffleAnswers = (question) => {
     const unshuffleAnswers = [
         question.correctAnswer,
         ...question.incorrectAnswers,
@@ -8,4 +8,17 @@ export const shuffleAnswers = question => {
         sort: Math.random(),
         value: unshuffleAnswer,
     })).sort((a,b) => a.sort - b.sort).map((a) => a.value);
+}
+
+export const normalizeQuestions = (backendQuestions) => {
+    return backendQuestions.map(backendQuestion => {
+        const incorrectAnswers = backendQuestion.incorrect_answers.map(
+            incorrectAnswer =>  decodeURIComponent(incorrectAnswer)
+        );
+        return {
+            correctAnswer: decodeURIComponent(backendQuestion.correct_answer),
+            question: decodeURIComponent(backendQuestion.question),
+            incorrectAnswers,
+        }
+    })
 }
